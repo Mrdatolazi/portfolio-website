@@ -8,6 +8,22 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      /* ეს პატარა კოდი დაამატეთ, რომ სურათები ლამაზად გამოჩნდეს */
+      .project-image-container {
+        width: 100%;
+        aspect-ratio: 16/9;
+        overflow: hidden;
+        background: #1a1a1a;
+        margin-bottom: 15px;
+      }
+      .project-image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+    </style>
   </head>
   <body>
     <header class="site-header">
@@ -32,59 +48,54 @@
           <article class="project-card">
             <div class="project-image-container">
               <img src="PRIVATE HOUSE - AUSTRALIA.webp" alt="Private House Australia" loading="lazy">
-              <span class="year-badge">2023</span>
             </div>
             <div class="project-meta">
               <h2 class="project-title">PRIVATE HOUSE - AUSTRALIA</h2>
-              <p class="project-subtitle">Exterior visualization</p>
+              <p class="project-subtitle">Exterior visualization | 2026</p>
             </div>
           </article>
 
           <article class="project-card">
             <div class="project-image-container">
               <img src="RUSTIC STYLE HOTEL ROOM.webp" alt="Rustic Hotel Room" loading="lazy">
-              <span class="year-badge">2026</span>
             </div>
             <div class="project-meta">
               <h2 class="project-title">RUSTIC STYLE HOTEL ROOM</h2>
-              <p class="project-subtitle">Interior visualization</p>
+              <p class="project-subtitle">Interior visualization | 2026</p>
             </div>
           </article>
 
           <article class="project-card">
             <div class="project-image-container">
               <img src="Dubai Lobby.webp" alt="Dubai Lobby" loading="lazy">
-              <span class="year-badge">2026</span>
             </div>
             <div class="project-meta">
               <h2 class="project-title">Dubai Lobby</h2>
-              <p class="project-subtitle">Lobby visualization</p>
+              <p class="project-subtitle">Lobby visualization | 2026</p>
             </div>
           </article>
 
-          </div>
+        </div>
       </section>
 
       <section id="contact" class="section contact-section">
         <div class="section-header">
           <h2 class="section-title">Contact</h2>
         </div>
-
         <div class="contact-layout">
           <div class="contact-text">
             <p>For collaborations, commissions or any questions, feel free to get in touch.</p>
           </div>
           <div class="contact-details">
             <a href="mailto:david@lazishvilis.com" class="contact-link">david@lazishvilis.com</a>
-            <a href="https://www.behance.net" class="contact-link" target="_blank" rel="noreferrer">Behance</a>
-            <a href="https://www.instagram.com" class="contact-link" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="https://www.behance.net/lazishvilis" class="contact-link" target="_blank">Behance</a>
+            <a href="https://www.instagram.com" class="contact-link" target="_blank">Instagram</a>
           </div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <button class="back-to-top" data-scroll-target="body">↑ Back to Top</button>
       <span class="footer-credit">© David Lazishvili | ARCHVIZ</span>
     </footer>
 
