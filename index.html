@@ -7,10 +7,7 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   </head>
   <body>
     <header class="site-header">
@@ -31,17 +28,23 @@
         </div>
 
         <div class="projects-grid">
-          <!-- Each project is wired to a render in /renders -->
+          
           <article class="project-card">
-            <div class="project-thumb thumb-private-house-2026" data-year="2026"></div>
+            <div class="project-image-container">
+              <img src="PRIVATE HOUSE - AUSTRALIA.webp" alt="Private House Australia" loading="lazy">
+              <span class="year-badge">2023</span>
+            </div>
             <div class="project-meta">
-              <h2 class="project-title">private-house</h2>
+              <h2 class="project-title">PRIVATE HOUSE - AUSTRALIA</h2>
               <p class="project-subtitle">Exterior visualization</p>
             </div>
           </article>
 
           <article class="project-card">
-            <div class="project-thumb thumb-rustic-hotel-room-2026" data-year="2026"></div>
+            <div class="project-image-container">
+              <img src="RUSTIC STYLE HOTEL ROOM.webp" alt="Rustic Hotel Room" loading="lazy">
+              <span class="year-badge">2026</span>
+            </div>
             <div class="project-meta">
               <h2 class="project-title">RUSTIC STYLE HOTEL ROOM</h2>
               <p class="project-subtitle">Interior visualization</p>
@@ -49,69 +52,17 @@
           </article>
 
           <article class="project-card">
-            <div class="project-thumb thumb-dubai-lobby-2026" data-year="2026"></div>
+            <div class="project-image-container">
+              <img src="Dubai Lobby.webp" alt="Dubai Lobby" loading="lazy">
+              <span class="year-badge">2026</span>
+            </div>
             <div class="project-meta">
               <h2 class="project-title">Dubai Lobby</h2>
               <p class="project-subtitle">Lobby visualization</p>
             </div>
           </article>
 
-          <article class="project-card">
-            <div class="project-thumb thumb-orchard-place-2026" data-year="2026"></div>
-            <div class="project-meta">
-              <h2 class="project-title">THE ORCHARD PLACE</h2>
-              <p class="project-subtitle">Residential complex</p>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-thumb thumb-apartment-next-2025" data-year="2025"></div>
-            <div class="project-meta">
-              <h2 class="project-title">APARTMENT</h2>
-              <p class="project-subtitle">NEXT COLLECTION</p>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-thumb thumb-next-apartment-2024" data-year="2024"></div>
-            <div class="project-meta">
-              <h2 class="project-title">NEXT - APARTMENT</h2>
-              <p class="project-subtitle">Modern interior</p>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-thumb thumb-paje-beach-resort-2024" data-year="2024"></div>
-            <div class="project-meta">
-              <h2 class="project-title">Paje Beach Resort</h2>
-              <p class="project-subtitle">Resort visualization</p>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-thumb thumb-PRIVATE HOUSE-AUSTRTALIA-2023" data-year="2023"></div>
-            <div class="project-meta">
-              <h2 class="project-title">PRIVATE HOUSE - AUSTRALIA</h2>
-              <p class="project-subtitle">PRIVATE HOUSE - AUSTRALIA</p>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-thumb thumb-private-house-2022" data-year="2022"></div>
-            <div class="project-meta">
-              <h2 class="project-title">PRIVATE HOUSE</h2>
-              <p class="project-subtitle">Family residence</p>
-            </div>
-          </article>
-
-          <article class="project-card">
-            <div class="project-thumb thumb-private-house-2021" data-year="2021"></div>
-            <div class="project-meta">
-              <h2 class="project-title">PRIVATE HOUSE</h2>
-              <p class="project-subtitle">Concept design</p>
-            </div>
-          </article>
-        </div>
+          </div>
       </section>
 
       <section id="contact" class="section contact-section">
@@ -121,31 +72,20 @@
 
         <div class="contact-layout">
           <div class="contact-text">
-            <p>
-              For collaborations, commissions or any questions, feel free to
-              get in touch.
-            </p>
+            <p>For collaborations, commissions or any questions, feel free to get in touch.</p>
           </div>
           <div class="contact-details">
-            <a href="mailto:youremail@example.com" class="contact-link">
-              youremail@example.com
-            </a>
-            <a href="https://www.behance.net" class="contact-link" target="_blank" rel="noreferrer">
-              Behance
-            </a>
-            <a href="https://www.instagram.com" class="contact-link" target="_blank" rel="noreferrer">
-              Instagram
-            </a>
+            <a href="mailto:david@lazishvilis.com" class="contact-link">david@lazishvilis.com</a>
+            <a href="https://www.behance.net" class="contact-link" target="_blank" rel="noreferrer">Behance</a>
+            <a href="https://www.instagram.com" class="contact-link" target="_blank" rel="noreferrer">Instagram</a>
           </div>
         </div>
       </section>
     </main>
 
     <footer class="site-footer">
-      <button class="back-to-top" data-scroll-target="body">
-        ↑ Back to Top
-      </button>
-      <span class="footer-credit">© <span id="year"></span> David Lazishvili | ARCHVIZ</span>
+      <button class="back-to-top" data-scroll-target="body">↑ Back to Top</button>
+      <span class="footer-credit">© David Lazishvili | ARCHVIZ</span>
     </footer>
 
     <script src="script.js"></script>
