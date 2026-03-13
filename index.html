@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>David Lazishvili | ARCHVIZ</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="logo">
+        <span class="logo-name">David Lazishvili</span>
+        <span class="logo-role">ARCHVIZ</span>
+      </div>
+      <nav class="main-nav">
+        <button class="nav-link" data-scroll-target="#work">Work</button>
+        <button class="nav-link" data-scroll-target="#contact">Contact</button>
+      </nav>
+    </header>
+
+    <main>
+      <section id="work" class="section work-section">
+        <div class="section-header">
+          <h1 class="section-title">Work</h1>
+        </div>
+
+        <div class="projects-grid">
+          <!-- Each project is wired to a render in /renders -->
+          <article class="project-card">
+            <div class="project-thumb thumb-private-house-2026" data-year="2026"></div>
+            <div class="project-meta">
+              <h2 class="project-title">PRIVATE HOUSE</h2>
+              <p class="project-subtitle">Exterior visualization</p>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-thumb thumb-rustic-hotel-room-2026" data-year="2026"></div>
+            <div class="project-meta">
+              <h2 class="project-title">RUSTIC STYLE HOTEL ROOM</h2>
+              <p class="project-subtitle">Interior visualization</p>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-thumb thumb-dubai-lobby-2026" data-year="2026"></div>
+            <div class="project-meta">
+              <h2 class="project-title">Dubai Lobby</h2>
+              <p class="project-subtitle">Lobby visualization</p>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-thumb thumb-orchard-place-2026" data-year="2026"></div>
+            <div class="project-meta">
+              <h2 class="project-title">THE ORCHARD PLACE</h2>
+              <p class="project-subtitle">Residential complex</p>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-thumb thumb-apartment-next-2025" data-year="2025"></div>
+            <div class="project-meta">
+              <h2 class="project-title">APARTMENT</h2>
+              <p class="project-subtitle">NEXT COLLECTION</p>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-thumb thumb-next-apartment-2024" data-year="2024"></div>
+            <div class="project-meta">
+              <h2 class="project-title">NEXT - APARTMENT</h2>
+              <p class="project-subtitle">Modern interior</p>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-thumb thumb-paje-beach-resort-2024" data-year="2024"></div>
+            <div class="project-meta">
+              <h2 class="project-title">Paje Beach Resort</h2>
+              <p class="project-subtitle">Resort visualization</p>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-thumb thumb-loft-apartment-2023" data-year="2023"></div>
+            <div class="project-meta">
+              <h2 class="project-title">LOFT DESIGN - APARTMENT</h2>
+              <p class="project-subtitle">Loft interior</p>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-thumb thumb-private-house-2022" data-year="2022"></div>
+            <div class="project-meta">
+              <h2 class="project-title">PRIVATE HOUSE</h2>
+              <p class="project-subtitle">Family residence</p>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-thumb thumb-private-house-2021" data-year="2021"></div>
+            <div class="project-meta">
+              <h2 class="project-title">PRIVATE HOUSE</h2>
+              <p class="project-subtitle">Concept design</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="section contact-section">
+        <div class="section-header">
+          <h2 class="section-title">Contact</h2>
+        </div>
+
+        <div class="contact-layout">
+          <div class="contact-text">
+            <p>
+              For collaborations, commissions or any questions, feel free to
+              get in touch.
+            </p>
+          </div>
+          <div class="contact-details">
+            <a href="mailto:youremail@example.com" class="contact-link">
+              youremail@example.com
+            </a>
+            <a href="https://www.behance.net" class="contact-link" target="_blank" rel="noreferrer">
+              Behance
+            </a>
+            <a href="https://www.instagram.com" class="contact-link" target="_blank" rel="noreferrer">
+              Instagram
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <button class="back-to-top" data-scroll-target="body">
+        ↑ Back to Top
+      </button>
+      <span class="footer-credit">© <span id="year"></span> David Lazishvili | ARCHVIZ</span>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
