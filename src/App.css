@@ -25,7 +25,6 @@
   text-transform: uppercase;
   font-size: 0.83rem;
 }
-
 .logo-name { font-weight: 500; }
 .logo-role { font-weight: 300; color: #9b9b9b; }
 
@@ -178,7 +177,6 @@
 .project-title { margin: 0; font-size: 0.86rem; letter-spacing: 0.12em; text-transform: uppercase; }
 .project-subtitle { margin: 0; font-size: 0.78rem; color: #9b9b9b; }
 
-/* Hover overlay on grid cards */
 .project-thumb-overlay {
   position: absolute;
   inset: 0;
@@ -198,7 +196,6 @@
   border: 1px solid rgba(255, 255, 255, 0.55);
   padding: 8px 20px;
   border-radius: 6px;
-  backdrop-filter: blur(4px);
 }
 
 .contact-section {
@@ -276,7 +273,7 @@
   .site-footer { padding-inline: 1.2rem; flex-direction: column; align-items: flex-start; }
 }
 
-/* ─── LIGHTBOX ──────────────────────────────────────────────────── */
+/* ─── LIGHTBOX ──────────────────────────────────────────────── */
 
 .lb-backdrop {
   position: fixed;
@@ -288,6 +285,7 @@
   justify-content: center;
 }
 
+/* KEY FIX: overflow visible so zoomed image is not clipped */
 .lb-image-wrap {
   position: relative;
   width: 88vw;
@@ -295,14 +293,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
-  border-radius: 6px;
+  overflow: visible;
   user-select: none;
 }
 
 .lb-image {
-  max-width: 100%;
-  max-height: 100%;
+  max-width: 88vw;
+  max-height: 82vh;
+  width: auto;
+  height: auto;
   object-fit: contain;
   display: block;
   transform-origin: center center;
@@ -368,7 +367,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(10, 10, 10, 0.75);
+  background: rgba(10, 10, 10, 0.8);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 999px;
   padding: 7px 18px;
@@ -401,13 +400,13 @@
   text-align: center;
 }
 
-/* Info bar at bottom of image */
+/* Info bar */
 .lb-info {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 100%);
   padding: 28px 18px 14px;
   display: flex;
   align-items: flex-end;
@@ -431,7 +430,6 @@
 .lb-subtitle {
   color: rgba(255, 255, 255, 0.45);
   font-size: 0.75rem;
-  letter-spacing: 0.06em;
 }
 
 @media (max-width: 600px) {
@@ -439,4 +437,5 @@
   .lb-arrow-left  { left: 6px; }
   .lb-arrow-right { right: 6px; }
   .lb-image-wrap  { width: 96vw; height: 75vh; }
+  .lb-image { max-width: 96vw; max-height: 75vh; }
 }

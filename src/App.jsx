@@ -4,67 +4,74 @@ import './App.css'
 
 const projects = [
   {
-    id: 'private-house-2026',
+    id: 'private-house-tbilisi',
     title: 'PRIVATE HOUSE',
     subtitle: 'Exterior visualization',
     year: '2026',
-    image: '/renders/private-house-2026.jpg',
+    image: '/renders/private-house-tbilisi.webp',
   },
   {
     id: 'rustic-hotel-room-2026',
     title: 'RUSTIC STYLE HOTEL ROOM',
     subtitle: 'Interior visualization',
     year: '2026',
-    image: '/renders/rustic-hotel-room-2026.jpg',
+    image: '/renders/rustic-hotel-room-2026.webp',
   },
   {
     id: 'dubai-lobby-2026',
     title: 'Dubai Lobby',
     subtitle: 'Lobby visualization',
     year: '2026',
-    image: '/renders/dubai-lobby-2026.jpg',
+    image: '/renders/dubai-lobby-2026.webp',
   },
   {
     id: 'orchard-place-2026',
     title: 'THE ORCHARD PLACE',
     subtitle: 'Residential complex',
     year: '2026',
-    image: '/renders/orchard-place-2026.jpg',
+    image: '/renders/orchard-place-2026.webp',
   },
   {
     id: 'apartment-next-2025',
     title: 'APARTMENT',
     subtitle: 'NEXT COLLECTION',
     year: '2025',
-    image: '/renders/apartment-next-2025.jpg',
+    image: '/renders/apartment-next-2025.webp',
   },
   {
     id: 'next-apartment-2024',
     title: 'NEXT - APARTMENT',
     subtitle: 'Modern interior',
     year: '2024',
-    image: '/renders/next-apartment-2024.jpg',
+    image: '/renders/next-apartment-2024.webp',
   },
   {
     id: 'paje-beach-resort-2024',
     title: 'Paje Beach Resort',
     subtitle: 'Resort visualization',
     year: '2024',
-    image: '/renders/paje-beach-resort-2024.jpg',
+    image: '/renders/paje-beach-resort-2024.webp',
   },
   {
     id: 'private-house-2022',
     title: 'PRIVATE HOUSE',
     subtitle: 'Family residence',
     year: '2022',
-    image: '/renders/private-house-2022.jpg',
+    image: '/renders/private-house-2022.webp',
   },
   {
     id: 'private-house-2021',
     title: 'PRIVATE HOUSE',
     subtitle: 'Concept design',
     year: '2021',
-    image: '/renders/private-house-2021.jpg',
+    image: '/renders/private-house-2021.webp',
+  },
+  {
+    id: 'private-house',
+    title: 'PRIVATE HOUSE',
+    subtitle: 'Architecture',
+    year: '2021',
+    image: '/renders/private-house.webp',
   },
 ]
 
@@ -87,77 +94,88 @@ const thumbVariants = {
 
 const MIN_ZOOM = 1
 const MAX_ZOOM = 4
-const ZOOM_STEP = 0.5
 
-function Lightbox({ project, index, onClose, onPrev, onNext }) {
+function Lightbox({ project, index, total, onClose, onPrev, onNext }) {
   const [zoom, setZoom] = useState(1)
-  const [pos, setPos] = useState({ x: 0, y: 0 })
-  const [dragging, setDragging] = useState(false)
-  const dragStart = useRef(null)
-  const posStart = useRef({ x: 0, y: 0 })
-  const touchStart = useRef(null)
+  const [offset, setOffset] = useState({ x: 0, y: 0 })
+  const dragging = useRef(false)
+  const lastPos = useRef({ x: 0, y: 0 })
+  const touchStartX = useRef(null)
+  const containerRef = useRef(null)
 
-  // Reset zoom/pos when project changes
   useEffect(() => {
     setZoom(1)
-    setPos({ x: 0, y: 0 })
+    setOffset({ x: 0, y: 0 })
   }, [index])
 
-  // Keyboard navigation
   useEffect(() => {
     const handler = (e) => {
       if (e.key === 'Escape') onClose()
-      if (e.key === 'ArrowRight') { setZoom(1); setPos({ x: 0, y: 0 }); onNext() }
-      if (e.key === 'ArrowLeft') { setZoom(1); setPos({ x: 0, y: 0 }); onPrev() }
+      if (e.key === 'ArrowRight') onNext()
+      if (e.key === 'ArrowLeft') onPrev()
     }
     window.addEventListener('keydown', handler)
     return () => window.removeEventListener('keydown', handler)
   }, [onClose, onNext, onPrev])
 
-  // Scroll to zoom
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = '' }
+  }, [])
+
   const handleWheel = useCallback((e) => {
     e.preventDefault()
+    e.stopPropagation()
+    const delta = e.deltaY < 0 ? 0.15 : -0.15
     setZoom(z => {
-      const next = z - e.deltaY * 0.002
-      return Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, next))
+      const next = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, z + delta))
+      if (next === MIN_ZOOM) setOffset({ x: 0, y: 0 })
+      return parseFloat(next.toFixed(2))
     })
   }, [])
 
-  // Mouse drag
+  useEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    el.addEventListener('wheel', handleWheel, { passive: false })
+    return () => el.removeEventListener('wheel', handleWheel)
+  }, [handleWheel])
+
   const handleMouseDown = (e) => {
     if (zoom <= 1) return
-    setDragging(true)
-    dragStart.current = { x: e.clientX, y: e.clientY }
-    posStart.current = { ...pos }
+    dragging.current = true
+    lastPos.current = { x: e.clientX, y: e.clientY }
+    e.preventDefault()
   }
-  const handleMouseMove = (e) => {
-    if (!dragging) return
-    setPos({
-      x: posStart.current.x + (e.clientX - dragStart.current.x),
-      y: posStart.current.y + (e.clientY - dragStart.current.y),
-    })
-  }
-  const handleMouseUp = () => setDragging(false)
 
-  // Touch swipe
+  const handleMouseMove = (e) => {
+    if (!dragging.current) return
+    const dx = e.clientX - lastPos.current.x
+    const dy = e.clientY - lastPos.current.y
+    lastPos.current = { x: e.clientX, y: e.clientY }
+    setOffset(o => ({ x: o.x + dx, y: o.y + dy }))
+  }
+
+  const handleMouseUp = () => { dragging.current = false }
+
   const handleTouchStart = (e) => {
-    touchStart.current = e.touches[0].clientX
+    touchStartX.current = e.touches[0].clientX
   }
   const handleTouchEnd = (e) => {
-    if (touchStart.current === null) return
-    const dx = e.changedTouches[0].clientX - touchStart.current
+    if (touchStartX.current === null) return
+    const dx = e.changedTouches[0].clientX - touchStartX.current
     if (Math.abs(dx) > 50) {
-      if (dx < 0) { setZoom(1); setPos({ x: 0, y: 0 }); onNext() }
-      else { setZoom(1); setPos({ x: 0, y: 0 }); onPrev() }
+      if (dx < 0) onNext()
+      else onPrev()
     }
-    touchStart.current = null
+    touchStartX.current = null
   }
 
-  const zoomIn = () => setZoom(z => Math.min(MAX_ZOOM, +(z + ZOOM_STEP).toFixed(1)))
+  const zoomIn = () => setZoom(z => parseFloat(Math.min(MAX_ZOOM, z + 0.5).toFixed(1)))
   const zoomOut = () => {
     setZoom(z => {
-      const next = Math.max(MIN_ZOOM, +(z - ZOOM_STEP).toFixed(1))
-      if (next === 1) setPos({ x: 0, y: 0 })
+      const next = parseFloat(Math.max(MIN_ZOOM, z - 0.5).toFixed(1))
+      if (next === MIN_ZOOM) setOffset({ x: 0, y: 0 })
       return next
     })
   }
@@ -171,27 +189,19 @@ function Lightbox({ project, index, onClose, onPrev, onNext }) {
       transition={{ duration: 0.2 }}
       onClick={onClose}
     >
-      {/* Prev */}
-      <button
-        className="lb-arrow lb-arrow-left"
-        onClick={(e) => { e.stopPropagation(); setZoom(1); setPos({ x: 0, y: 0 }); onPrev() }}
-        aria-label="Previous"
-      >
-        ‹
-      </button>
+      <button className="lb-arrow lb-arrow-left" onClick={(e) => { e.stopPropagation(); onPrev() }}>‹</button>
 
-      {/* Image container */}
       <div
+        ref={containerRef}
         className="lb-image-wrap"
         onClick={(e) => e.stopPropagation()}
-        onWheel={handleWheel}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
         onMouseLeave={handleMouseUp}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        style={{ cursor: zoom > 1 ? (dragging ? 'grabbing' : 'grab') : 'default' }}
+        style={{ cursor: zoom > 1 ? 'grab' : 'default' }}
       >
         <AnimatePresence mode="wait">
           <motion.img
@@ -199,52 +209,34 @@ function Lightbox({ project, index, onClose, onPrev, onNext }) {
             src={project.image}
             alt={project.title}
             className="lb-image"
-            initial={{ opacity: 0, scale: 0.97 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.97 }}
-            transition={{ duration: 0.18 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
             style={{
-              transform: `scale(${zoom}) translate(${pos.x / zoom}px, ${pos.y / zoom}px)`,
-              transition: dragging ? 'none' : 'transform 0.15s ease',
-              userSelect: 'none',
-              pointerEvents: 'none',
+              transformOrigin: 'center center',
+              transform: `scale(${zoom}) translate(${offset.x / zoom}px, ${offset.y / zoom}px)`,
             }}
             draggable={false}
           />
         </AnimatePresence>
 
-        {/* Info bar */}
         <div className="lb-info">
-          <span className="lb-counter">{index + 1} / {projects.length}</span>
+          <span className="lb-counter">{index + 1} / {total}</span>
           <span className="lb-title">{project.title}</span>
           <span className="lb-subtitle">{project.subtitle}</span>
         </div>
       </div>
 
-      {/* Next */}
-      <button
-        className="lb-arrow lb-arrow-right"
-        onClick={(e) => { e.stopPropagation(); setZoom(1); setPos({ x: 0, y: 0 }); onNext() }}
-        aria-label="Next"
-      >
-        ›
-      </button>
+      <button className="lb-arrow lb-arrow-right" onClick={(e) => { e.stopPropagation(); onNext() }}>›</button>
 
-      {/* Zoom controls */}
       <div className="lb-zoom-controls" onClick={(e) => e.stopPropagation()}>
         <button className="lb-zoom-btn" onClick={zoomOut} disabled={zoom <= MIN_ZOOM}>−</button>
         <span className="lb-zoom-level">{Math.round(zoom * 100)}%</span>
         <button className="lb-zoom-btn" onClick={zoomIn} disabled={zoom >= MAX_ZOOM}>+</button>
       </div>
 
-      {/* Close */}
-      <button
-        className="lb-close"
-        onClick={onClose}
-        aria-label="Close"
-      >
-        ×
-      </button>
+      <button className="lb-close" onClick={onClose}>×</button>
     </motion.div>
   )
 }
@@ -254,8 +246,8 @@ function App() {
 
   const openLightbox = (index) => setLightboxIndex(index)
   const closeLightbox = () => setLightboxIndex(null)
-  const goPrev = () => setLightboxIndex(i => (i - 1 + projects.length) % projects.length)
-  const goNext = () => setLightboxIndex(i => (i + 1) % projects.length)
+  const goPrev = useCallback(() => setLightboxIndex(i => (i - 1 + projects.length) % projects.length), [])
+  const goNext = useCallback(() => setLightboxIndex(i => (i + 1) % projects.length), [])
 
   const scrollTo = (selector) => {
     const target = selector === 'top' ? document.body : document.querySelector(selector)
@@ -368,6 +360,7 @@ function App() {
           <Lightbox
             project={projects[lightboxIndex]}
             index={lightboxIndex}
+            total={projects.length}
             onClose={closeLightbox}
             onPrev={goPrev}
             onNext={goNext}
