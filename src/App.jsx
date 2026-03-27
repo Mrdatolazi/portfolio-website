@@ -345,6 +345,7 @@ function App() {
               <a href="mailto:youremail@example.com" className="contact-link">youremail@example.com</a>
               <a href="https://www.behance.net" className="contact-link" target="_blank" rel="noreferrer">Behance</a>
               <a href="https://www.instagram.com" className="contact-link" target="_blank" rel="noreferrer">Instagram</a>
+              <a href="https://www.linkedin.com/in/david-lazishvili/" className="contact-link" target="_blank" rel="noreferrer">LinkedIn</a>
             </div>
           </div>
         </section>
